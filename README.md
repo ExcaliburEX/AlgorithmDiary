@@ -1,3 +1,4 @@
+
 <p align="center">
   <h1 align="center">AlgorithmDiary 算法日记📕</h1>
 </p>
@@ -23,11 +24,11 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
 
 - [柯摩的刷题日记](#%E6%9F%AF%E6%91%A9%E7%9A%84%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0)
   - [2021.2.4 ~ $\infty$](#202124--%5Cinfty)
-- [1️⃣ 数据结构篇](#%E2%83%A3-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%8711)
+- [1️⃣ 数据结构篇](#%E2%83%A3-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87)
   - [📚 1️⃣.1️⃣ 二叉树](#-%E2%83%A3%E2%83%A3-%E4%BA%8C%E5%8F%89%E6%A0%91)
     - [1️⃣.1️⃣.1️⃣ 二叉树遍历](#%E2%83%A3%E2%83%A3%E2%83%A3-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86)
       - [前序递归](#%E5%89%8D%E5%BA%8F%E9%80%92%E5%BD%92)
@@ -37,11 +38,16 @@
       - [DFS 深度搜索-从上到下](#dfs-%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2-%E4%BB%8E%E4%B8%8A%E5%88%B0%E4%B8%8B)
       - [DFS 深度搜索-从下向上（分治法）](#dfs-%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2-%E4%BB%8E%E4%B8%8B%E5%90%91%E4%B8%8A%E5%88%86%E6%B2%BB%E6%B3%95)
       - [BFS 层次遍历](#bfs-%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86)
-      - [2021-02-04](#2021-02-04)
+      - [$\mathit{2021-02-04}$](#%5Cmathit2021-02-04)
         - [1️⃣ 104. Maximum Depth of Binary Tree](#%E2%83%A3-104-maximum-depth-of-binary-tree)
-          - [题目描述](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0)
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF)
           - [解法一](#%E8%A7%A3%E6%B3%95%E4%B8%80)
+      - [$\mathit{2021-04-08}$](#%5Cmathit2021-04-08)
+        - [1️⃣ 105. 平衡二叉树](#%E2%83%A3-105-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1)
+          - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-1)
+          - [解法一](#%E8%A7%A3%E6%B3%95%E4%B8%80-1)
     - [1️⃣.1️⃣.2️⃣ 分治法应用](#%E2%83%A3%E2%83%A3%E2%83%A3-%E5%88%86%E6%B2%BB%E6%B3%95%E5%BA%94%E7%94%A8)
       - [典型示例](#%E5%85%B8%E5%9E%8B%E7%A4%BA%E4%BE%8B)
       - [归并排序](#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F)
@@ -52,6 +58,7 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # 柯摩的刷题日记
+
 
 ## 2021.2.4 ~ $\infty$
 
