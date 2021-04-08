@@ -5,7 +5,7 @@
 
 ---
 
-</br></br>
+
 <div align="center">
 
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=ExcaliburEX.AlgorithmDiary)[![Build Status](https://www.travis-ci.org/ExcaliburEX/AlgorithmDiary.svg?branch=master)](https://www.travis-ci.org/ExcaliburEX/AlgorithmDiary)
@@ -71,8 +71,8 @@
 # 1️⃣ 数据结构篇
 - 掌握二叉树递归与非递归遍历
 - 理解 DFS 前序遍历与分治法
-- 理解 BFS 层次遍历f=ax+b
-- $f=ax+b$
+- 理解 BFS 层次遍历
+
 ## 📚 1️⃣.1️⃣ 二叉树
 ### 1️⃣.1️⃣.1️⃣ 二叉树遍历
 前序遍历：先访问根节点，再前序遍历左子树，再前序遍历右子树 中序遍历：先中序遍历左子树，再访问根节点，再中序遍历右子树 后序遍历：先后序遍历左子树，再后序遍历右子树，再访问根节点。
