@@ -284,9 +284,39 @@ class Solution(object):
         return out
 ```
 
+#### $\mathit{2021-04-15}$
+#####  1️⃣ 124. [ 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
 
+###### **题目描述**
+> 给定一个非空二叉树，返回其最大路径和。
 
+###### 解题思路
+思路：分治法。最大路径的可能情况：左子树的最大路径，右子树的最大路径，或通过根结点的最大路径。其中通过根结点的最大路径值等于以左子树根结点为端点的最大路径值加以右子树根结点为端点的最大路径值再加上根结点值，这里还要考虑有负值的情况即负值路径需要丢弃不取。
 
+###### 解法
+```python
+class Solution(object):
+    def maxPathSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.maxPath = float('-inf')
+
+        def largest_path_ends_at(node):
+            if node is None:
+                return float('-inf')
+            e_l = largest_path_ends_at(node.left)
+            e_r = largest_path_ends_at(node.right)
+
+            self.maxPath = max(self.maxPath, node.val +
+                               max(0, e_l)+max(0, e_r), e_l, e_r)
+
+            return node.val + max(e_l, e_r, 0)
+
+        largest_path_ends_at(root)
+        return self.maxPath
+```
 ### 1️⃣.1️⃣.2️⃣ 分治法应用
 先分别处理局部，再合并结果。
 
