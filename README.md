@@ -322,6 +322,44 @@ class Solution(object):
         largest_path_ends_at(root)
         return self.maxPath
 ```
+
+
+
+
+#### $\mathit{2021-04-24}$
+#####  1️⃣ 236. [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+###### **题目描述**
+> 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+
+###### 解题思路
+思路：分治法，有左子树的公共祖先或者有右子树的公共祖先，就返回子树的祖先，否则返回根节点
+
+###### 解法
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root is None:
+            return None
+
+        if root == p or root == q:
+            return root
+
+        left  = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+
+        if left is not None and right is not None:
+            return root
+        elif left is not None:
+            return left
+        elif right is not None:
+            return right
+        else:
+            return None
+```
+
+
+
 ### 1️⃣.1️⃣.2️⃣ 分治法应用
 先分别处理局部，再合并结果。
 
