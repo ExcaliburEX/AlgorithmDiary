@@ -58,6 +58,11 @@
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3)
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-3)
           - [解法](#%E8%A7%A3%E6%B3%95-1)
+      - [2021-04-25](#2021-04-25)
+        - [1️⃣ 103. 二叉树的锯齿形层序遍历](#%E2%83%A3-103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-4)
+          - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-4)
+          - [解法](#%E8%A7%A3%E6%B3%95-2)
     - [1️⃣.1️⃣.2️⃣ 分治法应用](#%E2%83%A3%E2%83%A3%E2%83%A3-%E5%88%86%E6%B2%BB%E6%B3%95%E5%BA%94%E7%94%A8)
       - [典型示例](#%E5%85%B8%E5%9E%8B%E7%A4%BA%E4%BE%8B)
       - [归并排序](#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F)
@@ -359,6 +364,48 @@ class Solution:
             return right
         else:
             return None
+```
+#### 2021-04-25
+#####  1️⃣ 103. [二叉树的锯齿形层序遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
+
+###### **题目描述**
+> 给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
+
+###### 解题思路
+思路：在BFS迭代模板上改用双端队列控制输出顺序
+
+###### 解法
+```python
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+        levels = []
+        if root is None:
+            return levels
+        s = collections.deque([root])
+        start_from_left = True
+        while len(s) > 0:
+            levels.append([])
+            level_size = len(s)
+
+            if start_from_left:
+                for _ in range(level_size):
+                    node = s.popleft()
+                    levels[-1].append(node.val)
+                    if node.left is not None:
+                        s.append(node.left)
+                    if node.right is not None:
+                        s.append(node.right)
+            else:
+                for _ in range(level_size):
+                    node = s.pop()
+                    levels[-1].append(node.val)
+                    if node.right is not None:
+                        s.appendleft(node.right)
+                    if node.left is not None:
+                        s.appendleft(node.left)
+            start_from_left = not start_from_left
+
+        return levels
 ```
 
 
