@@ -38,6 +38,10 @@
       - [DFS 深度搜索-从上到下](#dfs-%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2-%E4%BB%8E%E4%B8%8A%E5%88%B0%E4%B8%8B)
       - [DFS 深度搜索-从下向上（分治法）](#dfs-%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2-%E4%BB%8E%E4%B8%8B%E5%90%91%E4%B8%8A%E5%88%86%E6%B2%BB%E6%B3%95)
       - [BFS 层次遍历](#bfs-%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86)
+    - [1️⃣.1️⃣.2️⃣ 分治法应用](#%E2%83%A3%E2%83%A3%E2%83%A3-%E5%88%86%E6%B2%BB%E6%B3%95%E5%BA%94%E7%94%A8)
+      - [典型示例](#%E5%85%B8%E5%9E%8B%E7%A4%BA%E4%BE%8B)
+      - [归并排序](#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F)
+      - [快速排序](#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F)
       - [2021-02-04](#2021-02-04)
         - [1️⃣ 104. Maximum Depth of Binary Tree](#%E2%83%A3-104-maximum-depth-of-binary-tree)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0)
@@ -58,16 +62,12 @@
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-3)
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-3)
           - [解法](#%E8%A7%A3%E6%B3%95-1)
+    - [1️⃣.1️⃣.3️⃣ BFS 层次应用](#%E2%83%A3%E2%83%A3%E2%83%A3-bfs-%E5%B1%82%E6%AC%A1%E5%BA%94%E7%94%A8)
       - [2021-04-25](#2021-04-25)
         - [1️⃣ 103. 二叉树的锯齿形层序遍历](#%E2%83%A3-103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-4)
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-4)
           - [解法](#%E8%A7%A3%E6%B3%95-2)
-    - [1️⃣.1️⃣.2️⃣ 分治法应用](#%E2%83%A3%E2%83%A3%E2%83%A3-%E5%88%86%E6%B2%BB%E6%B3%95%E5%BA%94%E7%94%A8)
-      - [典型示例](#%E5%85%B8%E5%9E%8B%E7%A4%BA%E4%BE%8B)
-      - [归并排序](#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F)
-      - [快速排序](#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F)
-    - [1️⃣.1️⃣.3️⃣ BFS 层次应用](#%E2%83%A3%E2%83%A3%E2%83%A3-bfs-%E5%B1%82%E6%AC%A1%E5%BA%94%E7%94%A8)
     - [1️⃣.1️⃣.4️⃣ 二叉搜索树应用](#%E2%83%A3%E2%83%A3%E2%83%A3-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%BA%94%E7%94%A8)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -250,163 +250,8 @@ class Solution:
         
         return levels
 ```
-#### 2021-02-04
-
-##### 1️⃣ 104. [Maximum Depth of Binary Tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
-###### **题目描述**
-> 给定一个二叉树，找出其最大深度。二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。说明: 叶子节点是指没有子节点的节点。
-
-###### 解题思路
-简单题，常规思路，分治法
-
-###### 解法一
-```python
-class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        
-        if root is None:
-            return 0
-        
-        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
-```
-#### 2021-04-08
-#####  1️⃣ 105. [平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)
-
-###### **题目描述**
-> 给定一个二叉树，判断它是否是高度平衡的二叉树。
-
-###### 解题思路
-分治法，左边平衡 && 右边平衡 && 左右两边高度 <= 1
-
-###### 解法一
-
-```python
-class Solution(object):
-    def isBalanced(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        def depth(root):
-            if root == None:
-                return 0, True
-            
-            dl, bl = depth(root.left)
-            dr, br = depth(root.right)
-            
-            return max(dl, dr) + 1, bl and br and abs(dl- dr) <2
-        _, out = depth(root)
-        return out
-```
-
-#### 2021-04-15
-#####  1️⃣ 124. [ 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
-
-###### **题目描述**
-> 给定一个非空二叉树，返回其最大路径和。
-
-###### 解题思路
-思路：分治法。最大路径的可能情况：左子树的最大路径，右子树的最大路径，或通过根结点的最大路径。其中通过根结点的最大路径值等于以左子树根结点为端点的最大路径值加以右子树根结点为端点的最大路径值再加上根结点值，这里还要考虑有负值的情况即负值路径需要丢弃不取。
-
-###### 解法
-```python
-class Solution(object):
-    def maxPathSum(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        self.maxPath = float('-inf')
-
-        def largest_path_ends_at(node):
-            if node is None:
-                return float('-inf')
-            e_l = largest_path_ends_at(node.left)
-            e_r = largest_path_ends_at(node.right)
-
-            self.maxPath = max(self.maxPath, node.val +
-                               max(0, e_l)+max(0, e_r), e_l, e_r)
-
-            return node.val + max(e_l, e_r, 0)
-
-        largest_path_ends_at(root)
-        return self.maxPath
-```
 
 
-#### 2021-04-24
-#####  1️⃣ 236. [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
-
-###### **题目描述**
-> 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
-
-###### 解题思路
-思路：分治法，有左子树的公共祖先或者有右子树的公共祖先，就返回子树的祖先，否则返回根节点
-
-###### 解法
-```python
-class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if root is None:
-            return None
-
-        if root == p or root == q:
-            return root
-
-        left  = self.lowestCommonAncestor(root.left, p, q)
-        right = self.lowestCommonAncestor(root.right, p, q)
-
-        if left is not None and right is not None:
-            return root
-        elif left is not None:
-            return left
-        elif right is not None:
-            return right
-        else:
-            return None
-```
-#### 2021-04-25
-#####  1️⃣ 103. [二叉树的锯齿形层序遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
-
-###### **题目描述**
-> 给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
-
-###### 解题思路
-思路：在BFS迭代模板上改用双端队列控制输出顺序
-
-###### 解法
-```python
-class Solution:
-    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
-        levels = []
-        if root is None:
-            return levels
-        s = collections.deque([root])
-        start_from_left = True
-        while len(s) > 0:
-            levels.append([])
-            level_size = len(s)
-
-            if start_from_left:
-                for _ in range(level_size):
-                    node = s.popleft()
-                    levels[-1].append(node.val)
-                    if node.left is not None:
-                        s.append(node.left)
-                    if node.right is not None:
-                        s.append(node.right)
-            else:
-                for _ in range(level_size):
-                    node = s.pop()
-                    levels[-1].append(node.val)
-                    if node.right is not None:
-                        s.appendleft(node.right)
-                    if node.left is not None:
-                        s.appendleft(node.left)
-            start_from_left = not start_from_left
-
-        return levels
-```
 
 
 
@@ -555,7 +400,167 @@ func swap(nums []int, i, j int) {
 - **注意点**
 	- 快排由于是原地交换所以没有合并过程 传入的索引是存在的索引（如：0、length-1 等），越界可能导致崩溃。
 
+#### 2021-02-04
+
+##### 1️⃣ 104. [Maximum Depth of Binary Tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+###### **题目描述**
+> 给定一个二叉树，找出其最大深度。二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。说明: 叶子节点是指没有子节点的节点。
+
+###### 解题思路
+简单题，常规思路，分治法
+
+###### 解法一
+```python
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        
+        if root is None:
+            return 0
+        
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+```
+#### 2021-04-08
+#####  1️⃣ 105. [平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)
+
+###### **题目描述**
+> 给定一个二叉树，判断它是否是高度平衡的二叉树。
+
+###### 解题思路
+分治法，左边平衡 && 右边平衡 && 左右两边高度 <= 1
+
+###### 解法一
+
+```python
+class Solution(object):
+    def isBalanced(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        def depth(root):
+            if root == None:
+                return 0, True
+            
+            dl, bl = depth(root.left)
+            dr, br = depth(root.right)
+            
+            return max(dl, dr) + 1, bl and br and abs(dl- dr) <2
+        _, out = depth(root)
+        return out
+```
+
+#### 2021-04-15
+#####  1️⃣ 124. [ 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
+
+###### **题目描述**
+> 给定一个非空二叉树，返回其最大路径和。
+
+###### 解题思路
+思路：分治法。最大路径的可能情况：左子树的最大路径，右子树的最大路径，或通过根结点的最大路径。其中通过根结点的最大路径值等于以左子树根结点为端点的最大路径值加以右子树根结点为端点的最大路径值再加上根结点值，这里还要考虑有负值的情况即负值路径需要丢弃不取。
+
+###### 解法
+```python
+class Solution(object):
+    def maxPathSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.maxPath = float('-inf')
+
+        def largest_path_ends_at(node):
+            if node is None:
+                return float('-inf')
+            e_l = largest_path_ends_at(node.left)
+            e_r = largest_path_ends_at(node.right)
+
+            self.maxPath = max(self.maxPath, node.val +
+                               max(0, e_l)+max(0, e_r), e_l, e_r)
+
+            return node.val + max(e_l, e_r, 0)
+
+        largest_path_ends_at(root)
+        return self.maxPath
+```
+
+
+#### 2021-04-24
+#####  1️⃣ 236. [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+###### **题目描述**
+> 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+
+###### 解题思路
+思路：分治法，有左子树的公共祖先或者有右子树的公共祖先，就返回子树的祖先，否则返回根节点
+
+###### 解法
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root is None:
+            return None
+
+        if root == p or root == q:
+            return root
+
+        left  = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+
+        if left is not None and right is not None:
+            return root
+        elif left is not None:
+            return left
+        elif right is not None:
+            return right
+        else:
+            return None
+```
+
 
 ### 1️⃣.1️⃣.3️⃣ BFS 层次应用
+
+#### 2021-04-25
+#####  1️⃣ 103. [二叉树的锯齿形层序遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
+
+###### **题目描述**
+> 给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
+
+###### 解题思路
+思路：在BFS迭代模板上改用双端队列控制输出顺序
+
+###### 解法
+```python
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+        levels = []
+        if root is None:
+            return levels
+        s = collections.deque([root])
+        start_from_left = True
+        while len(s) > 0:
+            levels.append([])
+            level_size = len(s)
+
+            if start_from_left:
+                for _ in range(level_size):
+                    node = s.popleft()
+                    levels[-1].append(node.val)
+                    if node.left is not None:
+                        s.append(node.left)
+                    if node.right is not None:
+                        s.append(node.right)
+            else:
+                for _ in range(level_size):
+                    node = s.pop()
+                    levels[-1].append(node.val)
+                    if node.right is not None:
+                        s.appendleft(node.right)
+                    if node.left is not None:
+                        s.appendleft(node.left)
+            start_from_left = not start_from_left
+
+        return levels
+```
+
 
 ### 1️⃣.1️⃣.4️⃣ 二叉搜索树应用
