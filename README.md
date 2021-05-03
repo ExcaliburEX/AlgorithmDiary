@@ -69,6 +69,10 @@
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-4)
           - [解法](#%E8%A7%A3%E6%B3%95-2)
     - [1️⃣.1️⃣.4️⃣ 二叉搜索树应用](#%E2%83%A3%E2%83%A3%E2%83%A3-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%BA%94%E7%94%A8)
+        - [1️⃣ 98. 验证二叉搜索树](#%E2%83%A3-98-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-5)
+          - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-5)
+          - [解法](#%E8%A7%A3%E6%B3%95-3)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -564,3 +568,35 @@ class Solution:
 
 
 ### 1️⃣.1️⃣.4️⃣ 二叉搜索树应用
+
+#####  1️⃣ 98. [验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+
+###### **题目描述**
+> 给定一个二叉树，判断其是否是一个有效的二叉搜索树。
+
+###### 解题思路
+- 思路1：中序遍历后检查输出是否有序，缺点是如果不平衡无法提前返回结果。
+- 思路2：分治法，一个二叉树为合法的二叉搜索树当且仅当左右子树为合法二叉搜索树且根结点值小于右子树最小值大于左子树最大值。缺点是若不用迭代形式实现则无法提前返回，而迭代实现又比较复杂。
+- 思路3：利用二叉搜索树的性质，根结点为左子树的右边界，右子树的左边界，使用先序遍历自顶向下更新左右子树的边界并检查是否合法，迭代版本实现简单且可以提前返回结果。
+
+###### 解法
+```python
+class Solution:
+    def isValidBST(self, root: TreeNode) -> bool:
+        
+        if root is None:
+            return True
+        
+        s = [(root, float('-inf'), float('inf'))]
+        while len(s) > 0:
+            node, low, up = s.pop()
+            if node.left is not None:
+                if node.left.val <= low or node.left.val >= node.val: # up更新为左子树的值
+                    return False
+                s.append((node.left, low, node.val))
+            if node.right is not None:
+                if node.right.val <= node.val or node.right.val >= up: # low更新为右子树的值
+                    return False
+                s.append((node.right, node.val, up))
+        # 考虑一个有父节点和两个子节点的右节点，它要大于父节点并且要小于右节点
+        return True
