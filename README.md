@@ -69,10 +69,22 @@
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-4)
           - [解法](#%E8%A7%A3%E6%B3%95-2)
     - [1️⃣.1️⃣.4️⃣ 二叉搜索树应用](#%E2%83%A3%E2%83%A3%E2%83%A3-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%BA%94%E7%94%A8)
+      - [2021-05-03](#2021-05-03)
         - [1️⃣ 98. 验证二叉搜索树](#%E2%83%A3-98-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-5)
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-5)
           - [解法](#%E8%A7%A3%E6%B3%95-3)
+      - [2021-05-05](#2021-05-05)
+        - [1️⃣ 701. 二叉搜索树中的插入操作](#%E2%83%A3-701-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-6)
+          - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-6)
+          - [解法](#%E8%A7%A3%E6%B3%95-4)
+  - [📚 1️⃣.2️⃣ 链表](#-%E2%83%A3%E2%83%A3-%E9%93%BE%E8%A1%A8)
+      - [2021-05-06](#2021-05-06)
+        - [1️⃣ 83. 删除排序链表中的重复元素](#%E2%83%A3-83-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-7)
+          - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-7)
+          - [解法](#%E8%A7%A3%E6%B3%95-5)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -568,7 +580,7 @@ class Solution:
 
 
 ### 1️⃣.1️⃣.4️⃣ 二叉搜索树应用
-
+#### 2021-05-03
 #####  1️⃣ 98. [验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
 ###### **题目描述**
@@ -600,3 +612,67 @@ class Solution:
                 s.append((node.right, node.val, up))
         # 考虑一个有父节点和两个子节点的右节点，它要大于父节点并且要小于右节点
         return True
+```
+#### 2021-05-05
+#####  1️⃣ 701. [二叉搜索树中的插入操作](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
+
+###### **题目描述**
+> 给定二叉搜索树（BST）的根节点和要插入树中的值，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。
+
+###### 解题思路
+思路：找到最后一个叶子节点满足插入条件即可。
+
+###### 解法
+```python
+class Solution:
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        
+        if root is None:
+            return TreeNode(val)
+        
+        node = root
+        while True:
+            if val > node.val:
+                if node.right is None:
+                    node.right = TreeNode(val)
+                    return root
+                else:
+                    node = node.right
+            else:
+                if node.left is None:
+                    node.left = TreeNode(val)
+                    return root
+                else:
+                    node = node.left
+```
+
+
+## 📚 1️⃣.2️⃣ 链表
+
+#### 2021-05-06
+
+#####  1️⃣ 83. [删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
+
+###### **题目描述**
+> 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+
+###### 解题思路
+常规思路
+###### 解法
+```python
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        
+        if head is None:
+            return head
+        
+        current = head
+        
+        while current.next is not None:
+            if current.next.val == current.val:
+                current.next = current.next.next
+            else:
+                current = current.next
+        
+        return head
+```
