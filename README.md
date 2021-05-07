@@ -85,6 +85,11 @@
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-7)
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-7)
           - [解法](#%E8%A7%A3%E6%B3%95-5)
+      - [2021-05-07](#2021-05-07)
+        - [1️⃣ 82.  删除排序链表中的重复元素 II](#%E2%83%A3-82--%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0-ii)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-8)
+          - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-8)
+          - [解法](#%E8%A7%A3%E6%B3%95-6)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -675,4 +680,43 @@ class Solution:
                 current = current.next
         
         return head
+```
+
+#### 2021-05-07
+
+#####  1️⃣ 82. [ 删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)
+
+###### **题目描述**
+> 存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除链表中所有存在数字重复情况的节点，只保留原始链表中 没有重复出现 的数字。
+
+###### 解题思路
+思路：链表头结点可能被删除，所以用 dummy node 辅助删除，current用来删除重复的第一个节点，peek删除重复的节点的第二个至第n个，最后判断peek是否删除过，还是最后删除一下。
+###### 解法
+```python
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        
+        if head is None:
+            return head
+        
+        dummy = ListNode(next=head)
+        
+        current, peek = dummy, head
+        find_dup = False
+        while peek.next is not None:
+            if peek.next.val == peek.val:
+                find_dup = True
+                peek.next = peek.next.next
+            else:
+                if find_dup:
+                    find_dup = False
+                    current.next = current.next.next
+                else:
+                    current = current.next
+                peek = peek.next
+        
+        if find_dup:
+            current.next = current.next.next
+        
+        return dummy.next
 ```
