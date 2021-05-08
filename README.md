@@ -90,6 +90,12 @@
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-8)
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-8)
           - [解法](#%E8%A7%A3%E6%B3%95-6)
+      - [2021-05-08](#2021-05-08)
+        - [1️⃣ 206. 反转链表](#%E2%83%A3-206-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-9)
+          - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-9)
+          - [解法一](#%E8%A7%A3%E6%B3%95%E4%B8%80-2)
+          - [解法二](#%E8%A7%A3%E6%B3%95%E4%BA%8C)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -719,4 +725,46 @@ class Solution:
             current.next = current.next.next
         
         return dummy.next
+```
+#### 2021-05-08
+
+#####  1️⃣ 206. [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+
+###### **题目描述**
+> 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
+
+###### 解题思路
+思路一：直接手动反转，tmp一直往后指，head不断更新最新的节点
+思路二：采用递归，next的next指向自己，自己的next指向空
+###### 解法一
+```python
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        
+        if head is None:
+            return head
+        
+        tail = head
+        while tail.next is not None:
+            # put tail.next to head  
+            tmp = tail.next
+            tail.next = tail.next.next
+            tmp.next = head
+            head = tmp
+        
+        return head
+
+```
+###### 解法二
+```python
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        
+        if head is None or head.next is None:
+            return head
+        rev_next = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+
+        return rev_next
 ```
