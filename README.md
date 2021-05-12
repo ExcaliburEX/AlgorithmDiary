@@ -427,6 +427,7 @@ func swap(nums []int, i, j int) {
 - **注意点**
 	- 快排由于是原地交换所以没有合并过程 传入的索引是存在的索引（如：0、length-1 等），越界可能导致崩溃。
 
+---
 #### 2021-02-04
 
 ##### 1️⃣ 104. [Maximum Depth of Binary Tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
@@ -446,6 +447,8 @@ class Solution:
         
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 ```
+
+---
 #### 2021-04-08
 #####  1️⃣ 105. [平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)
 
@@ -475,6 +478,8 @@ class Solution(object):
         _, out = depth(root)
         return out
 ```
+
+---
 
 #### 2021-04-15
 #####  1️⃣ 124. [ 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
@@ -511,7 +516,10 @@ class Solution(object):
 ```
 
 
+---
+
 #### 2021-04-24
+
 #####  1️⃣ 236. [二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
 ###### **题目描述**
@@ -546,6 +554,7 @@ class Solution:
 
 ### 1️⃣.1️⃣.3️⃣ BFS 层次应用
 
+---
 #### 2021-04-25
 #####  1️⃣ 103. [二叉树的锯齿形层序遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
 
@@ -591,6 +600,8 @@ class Solution:
 
 
 ### 1️⃣.1️⃣.4️⃣ 二叉搜索树应用
+
+---
 #### 2021-05-03
 #####  1️⃣ 98. [验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
@@ -624,6 +635,8 @@ class Solution:
         # 考虑一个有父节点和两个子节点的右节点，它要大于父节点并且要小于右节点
         return True
 ```
+
+---
 #### 2021-05-05
 #####  1️⃣ 701. [二叉搜索树中的插入操作](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
 
@@ -660,6 +673,7 @@ class Solution:
 
 ## 📚 1️⃣.2️⃣ 链表
 
+---
 #### 2021-05-06
 
 #####  1️⃣ 83. [删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
@@ -688,6 +702,7 @@ class Solution:
         return head
 ```
 
+---
 #### 2021-05-07
 
 #####  1️⃣ 82. [ 删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)
@@ -726,6 +741,8 @@ class Solution:
         
         return dummy.next
 ```
+
+---
 #### 2021-05-08
 
 #####  1️⃣ 206. [反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
@@ -734,8 +751,8 @@ class Solution:
 > 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
 
 ###### 解题思路
-思路一：直接手动反转，tmp一直往后指，head不断更新最新的节点
-思路二：采用递归，next的next指向自己，自己的next指向空
+- 思路一：直接手动反转，tmp一直往后指，head不断更新最新的节点
+- 思路二：采用递归，next的next指向自己，自己的next指向空
 ###### 解法一
 ```python
 class Solution:
@@ -768,3 +785,43 @@ class Solution:
 
         return rev_next
 ```
+
+---
+
+#### 2021-05-12
+
+#####  1️⃣ 92. [反转链表 II](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+
+###### **题目描述**
+> 反转从位置  m  到  n  的链表。请使用一趟扫描完成反转。
+
+###### 解题思路
+- 思路：先找到 m 处, 再反转 n - m 次即可，核心点就是start处，要使用curr.next而不是start
+
+###### 解法
+
+```python
+class Solution:
+    def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
+        
+        if head is None:
+            return head
+        
+        n -= m 
+        
+        curr = dummy = ListNode(next=head)
+        while m > 1: 
+            curr = curr.next
+            m -= 1
+        
+        start = curr.next
+        while n > 0: 
+            tmp = start.next
+            start.next = tmp.next
+            tmp.next = curr.next # 这里不能用start，下面同样，主要是需要curr.next来连接，虽然start一直在变，而curr.next一直指着第一个start
+            curr.next = tmp
+            n -= 1
+        return dummy.next
+```
+
+---
