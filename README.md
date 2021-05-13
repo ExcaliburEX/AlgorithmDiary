@@ -101,6 +101,11 @@
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-10)
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-10)
           - [解法](#%E8%A7%A3%E6%B3%95-7)
+      - [2021-05-13](#2021-05-13)
+        - [1️⃣ 21. 合并两个有序链表](#%E2%83%A3-21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-11)
+          - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-11)
+          - [解法](#%E8%A7%A3%E6%B3%95-8)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -826,6 +831,45 @@ class Solution:
             tmp.next = curr.next # 这里不能用start，下面同样，主要是需要curr.next来连接，虽然start一直在变，而curr.next一直指着第一个start
             curr.next = tmp
             n -= 1
+        return dummy.next
+```
+
+---
+
+
+---
+
+#### 2021-05-13
+
+#####  1️⃣ 21. [合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+
+###### **题目描述**
+> 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+
+###### 解题思路
+- 思路：定义一个dummy，再用tail作为其移动指针，按照顺序连接
+
+###### 解法
+
+```python
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        
+        tail = dummy = ListNode()
+        while l1 is not None and l2 is not None:
+            if l1.val > l2.val:
+                tail.next = l2
+                l2 = l2.next
+            else:
+                tail.next = l1
+                l1 = l1.next
+            tail = tail.next
+                
+        if l1 is None:
+            tail.next = l2
+        else:
+            tail.next = l1
+
         return dummy.next
 ```
 
