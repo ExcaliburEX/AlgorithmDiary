@@ -106,6 +106,10 @@
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-11)
           - [解题思路](#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF-11)
           - [解法](#%E8%A7%A3%E6%B3%95-8)
+      - [2021-05-17](#2021-05-17)
+        - [1️⃣ 86. 分隔链表](#%E2%83%A3-86-%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-12)
+          - [解法](#%E8%A7%A3%E6%B3%95-9)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -837,8 +841,6 @@ class Solution:
 ---
 
 
----
-
 #### 2021-05-13
 
 #####  1️⃣ 21. [合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
@@ -871,6 +873,40 @@ class Solution:
             tail.next = l1
 
         return dummy.next
+```
+
+---
+
+#### 2021-05-17
+
+#####  1️⃣ 86. [分隔链表](https://leetcode-cn.com/problems/partition-list/)
+
+###### **题目描述**
+> 给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于  x  的节点都在大于或等于  x  的节点之前。
+###### 解题思路
+- 思路：将大于 x 的节点，放到另外一个链表，最后连接这两个链表，当头节点不确定的时候，使用哑巴节点
+
+###### 解法
+
+```python
+class Solution:
+    def partition(self, head: ListNode, x: int) -> ListNode:
+        p = l = ListNode()
+        q = s = ListNode(next=head)
+        
+        while q.next is not None:
+            if q.next.val < x:
+                q = q.next
+            else:
+                p.next = q.next
+                q.next = q.next.next
+                p = p.next
+        
+        p.next = None
+        q.next = l.next
+
+        return s.next
+            
 ```
 
 ---
