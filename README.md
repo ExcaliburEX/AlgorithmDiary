@@ -110,6 +110,10 @@
         - [1️⃣ 86. 分隔链表](#%E2%83%A3-86-%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-12)
           - [解法](#%E8%A7%A3%E6%B3%95-9)
+      - [2021-05-18](#2021-05-18)
+        - [1️⃣ 148. 排序链表](#%E2%83%A3-148-%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-13)
+          - [解法](#%E8%A7%A3%E6%B3%95-10)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -906,6 +910,63 @@ class Solution:
         q.next = l.next
 
         return s.next
+            
+```
+
+---
+
+
+#### 2021-05-18
+
+#####  1️⃣ 148. [排序链表](https://leetcode-cn.com/problems/sort-list/)
+
+###### **题目描述**
+> 在  O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+###### 解题思路
+- 思路：归并排序，slow-fast找中点
+  - 找中间节点方法：快慢指针，判断 fast 及 fast.Next 是否为 None 值
+  - 递归 mergeSort 需要断开中间节点，mid.next = None
+  - 递归返回条件为 head 为 None 或者 head.Next 为 None
+
+###### 解法
+
+```python
+
+class Solution:
+    def _merge(self, l1, l2): # 合并两个有序链表
+        tail = l_merge = ListNode()
+
+        while l1 is not None and l2 is not None:
+            if l1.val > l2.val:
+                tail.next = l2
+                l2 = l2.next
+            else:
+                tail.next = l1
+                l1 = l1.next
+            tail = tail.next
+        if l1 is not None:
+            tail.next = l1
+        else:
+            tail.next = l2
+
+        return l_merge.next
+
+    def _findmid(self, head): # 找链表的中间节点
+        slow, fast = head,head.next
+        while fast is not None and fast.next is not None:
+            fast = fast.next.next
+            slow = slow.next
+
+        return slow
+
+    def sortList(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None:
+            return head
+        mid = self._findmid(head) # 先找中间节点
+        tail = mid.next # tail指向下一半的第一个节点
+        mid.next = None # 断开两个链表
+
+        return self._merge(self.sortList(head),self.sortList(tail)) # 递归合并两个区间
             
 ```
 
