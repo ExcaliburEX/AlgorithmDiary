@@ -971,3 +971,55 @@ class Solution:
 ```
 
 ---
+#### 2021-05-19~26
+
+#####  1️⃣ 143. [排序链表](https://leetcode-cn.com/problems/reorder-list/)
+
+###### **题目描述**
+> 给定一个单链表  L：L→L→…→L__n→L 将其重新排列后变为： L→L__n→L→L__n→L→L__n→…
+###### 解题思路
+- 思路：找到中点断开，翻转后面部分，然后左一个右一个地合并链表
+  - 逆转链表的快速写法
+  - 通过快慢指针找到中间节点，再左右开弓
+
+###### 解法
+
+```python
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        # 逆转链表的快捷写法
+        prev, curr = None, head
+        while curr is not None:
+            curr.next,prev,curr = prev,curr,curr.next
+
+        return prev
+
+    def reorderList(self, head: ListNode) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        if head is None or head.next is None or head.next.next is None:
+            return
+
+        slow, fast = head, head.next
+        while fast is not None and fast.next is not None:
+            fast = fast.next.next
+            slow = slow.next
+
+        h, m = head, slow.next
+        slow.next = None
+
+        m = self.reverseList(m)
+
+        while h is not None and m is not None: # 左边链表一个，右边链一个地接合
+            p = m.next
+            m.next = h.next
+            h.next = m
+            h = h.next.next
+            m = p
+        return
+      
+```
+
+---
