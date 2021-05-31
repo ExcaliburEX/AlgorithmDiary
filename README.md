@@ -118,6 +118,10 @@
         - [1️⃣ 143. 排序链表](#%E2%83%A3-143-%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-14)
           - [解法](#%E8%A7%A3%E6%B3%95-11)
+      - [2021-05-31](#2021-05-31)
+        - [1️⃣ 141. 环形链表](#%E2%83%A3-141-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-15)
+          - [解法](#%E8%A7%A3%E6%B3%95-12)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1023,6 +1027,39 @@ class Solution:
             h = h.next.next
             m = p
         return
+      
+```
+
+---
+
+
+#### 2021-05-31
+
+#####  1️⃣ 141. [环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+
+###### **题目描述**
+> 给定一个链表，判断链表中是否有环。
+###### 解题思路
+- 思路：快慢指针，快慢指针相同则有环
+  - 证明：如果有环每走一步快慢指针距离会减 1
+  - 空间复杂度 O(1) 最优
+  - 时间复杂度 O(n) 但循环次数小于等于 n
+
+
+###### 解法
+
+```python
+
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        slow = fast = head
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+            if fast == slow:
+                return True
+
+        return False
       
 ```
 
