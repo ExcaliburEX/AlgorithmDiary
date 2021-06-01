@@ -122,6 +122,10 @@
         - [1️⃣ 141. 环形链表](#%E2%83%A3-141-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-15)
           - [解法](#%E8%A7%A3%E6%B3%95-12)
+      - [2021-06-01](#2021-06-01)
+        - [1️⃣ 142. 环形链表 II](#%E2%83%A3-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8-ii)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-16)
+          - [解法](#%E8%A7%A3%E6%B3%95-13)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1060,6 +1064,46 @@ class Solution:
                 return True
 
         return False
+      
+```
+
+---
+#### 2021-06-01
+
+#####  1️⃣ 142. [环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
+
+###### **题目描述**
+> 给定一个链表，返回链表开始入环的第一个节点. 如果链表无环，则返回`null`。
+###### 解题思路
+- 思路：快慢指针，快慢相遇之后，慢指针回到头，快慢指针步调一致一起移动，再次相遇点即为入环点。
+  - 指针比较时直接比较对象，不要用值比较，链表中有可能存在重复值情况
+  - 第一次相交后，快指针需要从下一个节点开始和头指针一起匀速移动
+  - 时间复杂度 O(n) 但循环次数小于等于 n
+  - fast 如果初始化为 head.Next 则中点在 slow.Next
+  - fast 初始化为 head,则中点在 slow
+
+
+###### 解法
+
+```python
+
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        
+        slow = fast = head
+        
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+            
+            if slow == fast:
+                slow = head
+                while fast != slow:
+                    fast = fast.next
+                    slow = slow.next
+                return slow
+
+        return None
       
 ```
 
