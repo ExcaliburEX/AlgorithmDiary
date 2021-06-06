@@ -1108,3 +1108,92 @@ class Solution:
 ```
 
 ---
+#### 2021-06-03
+
+#####  1️⃣ 234. [回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
+
+###### **题目描述**
+> 请判断一个链表是否为回文链表。
+###### 解题思路
+- 思路：O(1) 空间复杂度的解法需要破坏原链表
+  - 找中点
+  - 反转后半个list
+  - 判断回文
+  - 在实际应用中往往还需要复原（后半个list再反转一次后拼接），操作比较复杂
+  - 可以采用只取值比较的做法
+
+
+###### 解法
+
+```python
+
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        
+        s = []
+        slow = fast = head
+        while fast is not None and fast.next is not None:
+            s.append(slow.val)
+            slow = slow.next
+            fast = fast.next.next
+        
+        if fast is not None: # 中点是slow，如果是双数节点数，下一半的开头在slow.next
+            slow = slow.next
+        
+        while len(s) > 0:
+            if slow.val != s.pop():
+                return False
+            slow = slow.next
+            
+        return True
+      
+```
+
+---
+#### 2021-06-06
+
+#####  1️⃣ 138. [复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)
+
+###### **题目描述**
+> 给定一个链表，每个节点包含一个额外增加的随机指针，该指针可以指向链表中的任何节点或空节点。 要求返回这个链表的 深拷贝。
+###### 解题思路
+- 思路：利用collections.defaultdict()创造hash table，存储 random 指针的连接关系
+
+
+###### 解法
+
+```python
+import collections
+
+class Solution:
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        
+        if head is None:
+            return None
+        
+        parent = collections.defaultdict(list) # 创造hash表结构
+
+        
+        out = Node(0)
+        o, n = head, out
+        while o is not None:
+            n.next = Node(o.val) # 复制next结构
+            n = n.next
+            if o.random is not None:
+                parent[o.random].append(n) # 存储random表
+            o = o.next
+            
+        o, n = head, out.next
+        while o is not None:
+            if o in parent:
+                for p in parent[o]: # o, n 同步后移，然后对parent[o]中所有值进行连接
+                    p.random = n # 这里指向n是因为o,n同步移动，所以n跟o在同样的位置
+            o = o.next
+            n = n.next
+        
+        return out.next
+
+      
+```
+
+---
