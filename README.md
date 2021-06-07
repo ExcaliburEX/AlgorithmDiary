@@ -134,6 +134,10 @@
         - [1️⃣ 138. 复制带随机指针的链表](#%E2%83%A3-138-%E5%A4%8D%E5%88%B6%E5%B8%A6%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-18)
           - [解法](#%E8%A7%A3%E6%B3%95-15)
+      - [2021-06-07](#2021-06-07)
+        - [1️⃣ 155. 最小栈](#%E2%83%A3-155-%E6%9C%80%E5%B0%8F%E6%A0%88)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-19)
+          - [解法](#%E8%A7%A3%E6%B3%95-16)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1200,6 +1204,49 @@ class Solution:
             n = n.next
         
         return out.next
+
+      
+```
+
+---
+
+#### 2021-06-07
+
+#####  1️⃣ 155. [最小栈](https://leetcode-cn.com/problems/min-stack/)
+
+###### **题目描述**
+> 设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+###### 解题思路
+- 思路：用元组来存储栈中的元素，第一个值为插入的值，第二个值为最小值，随着插入不断更新，保证当前最小值在栈顶即可。
+
+###### 解法
+
+```python
+import collections
+
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+
+
+    def push(self, val: int) -> None:
+        if len(self.stack) > 0:
+            self.stack.append((val,min(val,self.stack[-1][1])))
+        else:
+            self.stack.append((val,val))
+
+    def pop(self) -> None:
+        return self.stack.pop()[0]
+
+    def top(self) -> int:
+        return self.stack[-1][0]
+
+    def getMin(self) -> int:
+        return self.stack[-1][1]
 
       
 ```
