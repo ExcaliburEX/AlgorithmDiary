@@ -138,6 +138,10 @@
         - [1️⃣ 155. 最小栈](#%E2%83%A3-155-%E6%9C%80%E5%B0%8F%E6%A0%88)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-19)
           - [解法](#%E8%A7%A3%E6%B3%95-16)
+      - [2021-06-07](#2021-06-07-1)
+        - [1️⃣ 150. 逆波兰表达式求值](#%E2%83%A3-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-20)
+          - [解法](#%E8%A7%A3%E6%B3%95-17)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1249,6 +1253,50 @@ class MinStack:
         return self.stack[-1][1]
 
       
+```
+
+
+---
+#### 2021-06-07
+
+#####  1️⃣ 150. [逆波兰表达式求值](https://leetcode-cn.com/problems/min-stack/)
+
+###### **题目描述**
+> 波兰表达式计算 > 输入: ["2", "1", "+", "3", "*"] > 输出: 9 解释: ((2 + 1) * 3) = 9
+###### 解题思路
+- 思路：通过栈保存原来的元素，遇到表达式弹出运算，再推入结果，重复这个过程
+
+###### 解法
+
+```python
+import collections
+
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        # 去掉括号后表达式无歧义
+        # 遇到数字则入栈；遇到算符则取出栈顶两个数字进行计算，并将结果压入栈中。
+        def comp(or1, op, or2):
+            if op == '+':
+                return or1 + or2
+            if op == '-':
+                return or1 - or2
+            if op == '*':
+                return or1 * or2
+            if op == '/':
+                abs_result = abs(or1) // abs(or2)
+                return abs_result if or1 * or2 > 0 else -abs_result
+
+        stack = []
+
+        for token in tokens:
+            if token in ['+', '-','*', '/']:
+                or2 = stack.pop()
+                or1 = stack.pop()
+                stack.append(comp(or1,token,or2))
+            else:
+                stack.append(int(token))
+
+        return stack[0]    
 ```
 
 ---
