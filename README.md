@@ -138,10 +138,14 @@
         - [1️⃣ 155. 最小栈](#%E2%83%A3-155-%E6%9C%80%E5%B0%8F%E6%A0%88)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-19)
           - [解法](#%E8%A7%A3%E6%B3%95-16)
-      - [2021-06-07](#2021-06-07-1)
+      - [2021-06-09](#2021-06-09)
         - [1️⃣ 150. 逆波兰表达式求值](#%E2%83%A3-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-20)
           - [解法](#%E8%A7%A3%E6%B3%95-17)
+      - [2021-06-10](#2021-06-10)
+        - [1️⃣ 394. 字符串解码](#%E2%83%A3-394-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-21)
+          - [解法](#%E8%A7%A3%E6%B3%95-18)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1297,6 +1301,42 @@ class Solution:
                 stack.append(int(token))
 
         return stack[0]    
+```
+
+---
+#### 2021-06-10
+
+#####  1️⃣ 394. [字符串解码](https://leetcode-cn.com/problems/decode-string/)
+
+###### **题目描述**
+> 给定一个经过编码的字符串，返回它解码后的字符串。 s = "3[a]2[bc]", 返回 "aaabcbc". s = "3[a2[c]]", 返回 "accaccacc". s = "2[abc]3[cd]ef", 返回 "abcabccdcdcdef".
+###### 解题思路
+- 思路：通过两个栈进行操作，一个用于存数，另一个用来存字符串
+
+###### 解法
+
+```python
+class Solution:
+    def decodeString(self, s: str) -> str:
+        
+        stack_str = [''] # 栈初始化为字符串一定要注意
+        stack_num = []
+        
+        num = 0
+        for c in s:
+            if c >= '0' and c <= '9':
+                num = num * 10 + int(c)
+            elif c == '[':
+                stack_num.append(num)
+                stack_str.append('')
+                num = 0
+            elif c == ']':
+                cur_str = stack_str.pop()
+                stack_str[-1] += cur_str * stack_num.pop() # 这里有一种情况："3[a2[c]]"括号里包括号，所以一定要先弹出，再合并，最后输出第一个元素
+            else:
+                stack_str[-1] += c
+        
+        return stack_str[0]
 ```
 
 ---
