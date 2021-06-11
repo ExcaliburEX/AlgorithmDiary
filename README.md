@@ -146,6 +146,10 @@
         - [1️⃣ 394. 字符串解码](#%E2%83%A3-394-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-21)
           - [解法](#%E8%A7%A3%E6%B3%95-18)
+      - [2021-06-11](#2021-06-11)
+        - [1️⃣ 94. 二叉树的中序遍历](#%E2%83%A3-94-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-22)
+          - [解法](#%E8%A7%A3%E6%B3%95-19)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1337,6 +1341,39 @@ class Solution:
                 stack_str[-1] += c
         
         return stack_str[0]
+```
+
+---
+
+
+#### 2021-06-11
+
+#####  1️⃣ 94. [二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+
+###### **题目描述**
+> 给定一个二叉树，返回它的中序遍历。
+###### 解题思路
+- 思路：不断往左子树前进，进栈，若左子树为空，那么就弹出栈顶元素打印，再进行右子树进栈。
+
+###### 解法
+
+```python
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        inorder, stack = [], []
+        node = root
+
+        while len(stack) > 0 or node is not None:
+            if node is not None:
+                stack.append(node)
+                node = node.left
+            else:
+                node = stack.pop()
+                inorder.append(node.val)
+                node = node.right
+
+        return inorder
+        
 ```
 
 ---
