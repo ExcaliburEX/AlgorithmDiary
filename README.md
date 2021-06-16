@@ -154,6 +154,10 @@
         - [1️⃣ 133. 克隆图](#%E2%83%A3-133-%E5%85%8B%E9%9A%86%E5%9B%BE)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-23)
           - [解法](#%E8%A7%A3%E6%B3%95-20)
+      - [2021-06-16](#2021-06-16)
+        - [1️⃣ 200. 岛屿数量](#%E2%83%A3-200-%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-24)
+          - [解法](#%E8%A7%A3%E6%B3%95-21)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1414,6 +1418,67 @@ class Solution:
         return visited[node]
 
         
+```
+
+---
+
+
+
+#### 2021-06-16
+
+#####  1️⃣ 200. [岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+
+###### **题目描述**
+> 给定一个由  '1'（陆地）和 '0'（水）组成的的二维网格，计算岛屿的数量。一个岛被水包围，并且它是通过水平方向或垂直方向上相邻的陆地连接而成的。你可以假设网格的四个边均被水包围。
+###### 解题思路
+- 思路：沉岛思想：如果遇到一块陆地，DFS往四个方向搜索，把经过的陆地标记为湖水（沉岛，避免重复遍历）
+
+###### 解法
+
+```python
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid or not grid[0]:
+            return 0
+
+        m, n = len(grid), len(grid[0])
+
+        def dfs_iter(i, j): # 非递归
+            dfs = []
+            dfs.append((i, j))
+            while len(dfs) > 0:
+                i, j = dfs.pop()
+                if grid[i][j] == '1':
+                    grid[i][j] = '0'
+                    if i-1 >= 0:
+                        dfs.append((i-1, j))
+                    if j-1 >= 0:
+                        dfs.append((i, j-1))
+                    if i+1 < m:
+                        dfs.append((i+1, j))
+                    if j+1 < n:
+                        dfs.append((i, j+1))
+            return
+
+        def dfs(grid, i, j): # 递归
+            if not 0 <= i < m or not 0 <= j < n or grid[i][j] == '0': # 判断是否在某个范围之外 not 用法 很新奇
+                return  # 碰到水或者出界
+            grid[i][j] = '0'  # 将访问过的陆地标记为水面
+            dfs(grid, i-1, j)  # 向上
+            dfs(grid, i+1, j)  # 向下
+            dfs(grid, i, j-1)  # 向左
+            dfs(grid, i, j+1)  # 向右
+
+
+        num_island = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == '1':
+                    num_island += 1
+                    # dfs_iter(i, j)
+                    dfs(grid, i, j)
+
+        return num_island  
 ```
 
 ---
