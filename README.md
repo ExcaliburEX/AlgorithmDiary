@@ -158,6 +158,11 @@
         - [1️⃣ 200. 岛屿数量](#%E2%83%A3-200-%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-24)
           - [解法](#%E8%A7%A3%E6%B3%95-21)
+      - [2021-06-24](#2021-06-24)
+        - [1️⃣ 84. 柱状图中最大的矩形](#%E2%83%A3-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-25)
+          - [解法一](#%E8%A7%A3%E6%B3%95%E4%B8%80-3)
+          - [解法二](#%E8%A7%A3%E6%B3%95%E4%BA%8C-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1479,6 +1484,59 @@ class Solution:
                     dfs(grid, i, j)
 
         return num_island  
+```
+
+---
+#### 2021-06-24
+
+#####  1️⃣ 84. [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
+
+###### **题目描述**
+> 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。 求在该柱状图中，能够勾勒出来的矩形的最大面积。
+###### 解题思路
+- 思路一：必会暴力法，比较每个以 i 开始 j 结束的最大矩形，A(i, j) = (j - i + 1) * min_height(i, j)，时间复杂度 O(n^2) 无法 AC。
+- 思路二：包含当前 bar 最大矩形的边界为左边第一个高度小于当前高度的 bar 和右边第一个高度小于当前高度的 bar。暂时没看懂
+
+###### 解法一
+
+```python
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        
+        max_area = 0
+        
+        n = len(heights)
+        for i in range(n):
+            min_height = heights[i]
+            for j in range(i, n):
+                min_height = min(min_height, heights[j])
+                max_area = max(max_area, min_height * (j - i + 1))
+        
+        return max_area
+
+```
+###### 解法二
+
+```python
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        
+        n = len(heights)
+        
+        stack = [-1]
+        max_area = 0
+        
+        for i in range(n):
+            while len(stack) > 1 and heights[stack[-1]] > heights[i]:
+                h = stack.pop()
+                max_area = max(max_area, heights[h] * (i - stack[-1] - 1))
+            stack.append(i)
+        
+        while len(stack) > 1:
+            h = stack.pop()
+            max_area = max(max_area, heights[h] * (n - stack[-1] - 1))
+        
+        return max_area
 ```
 
 ---
