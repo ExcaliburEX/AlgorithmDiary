@@ -163,6 +163,10 @@
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-25)
           - [解法一](#%E8%A7%A3%E6%B3%95%E4%B8%80-3)
           - [解法二](#%E8%A7%A3%E6%B3%95%E4%BA%8C-1)
+      - [2021-07-11](#2021-07-11)
+        - [1️⃣ 232. 用栈实现队列](#%E2%83%A3-232-%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97)
+          - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-26)
+          - [解法一](#%E8%A7%A3%E6%B3%95%E4%B8%80-4)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1537,6 +1541,67 @@ class Solution:
             max_area = max(max_area, heights[h] * (n - stack[-1] - 1))
         
         return max_area
+```
+
+---
+
+
+#### 2021-07-11
+
+#####  1️⃣ 232. [用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
+
+###### **题目描述**
+> 使用栈实现队列
+###### 解题思路
+- 两个栈，一个进，一个出
+- cache负责进数据，out负责出数据
+- 当out为空时，将cache一股脑都倒进去，再弹出顶层元素
+- 当out不为空时，就弹出它顶层元素
+
+###### 解法一
+
+```python
+class MyQueue:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.cache = []
+        self.out = []
+
+    def push(self, x: int) -> None:
+        """
+        Push element x to the back of queue.
+        """
+        self.cache.append(x)
+
+    def pop(self) -> int:
+        """
+        Removes the element from in front of queue and returns that element.
+        """
+        if len(self.out) == 0:
+            while len(self.cache) > 0:
+                self.out.append(self.cache.pop())
+
+        return self.out.pop()
+
+
+    def peek(self) -> int:
+        """
+        Get the front element.
+        """
+        if len(self.out) > 0:
+            return self.out[-1]
+        else:
+            return self.cache[0]
+    
+    def empty(self) -> bool:
+        """
+        Returns whether the queue is empty.
+        """
+        return len(self.cache) == 0 and len(self.out) == 0
+
 ```
 
 ---
