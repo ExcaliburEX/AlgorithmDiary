@@ -134,6 +134,7 @@
         - [1️⃣ 138. 复制带随机指针的链表](#%E2%83%A3-138-%E5%A4%8D%E5%88%B6%E5%B8%A6%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-18)
           - [解法](#%E8%A7%A3%E6%B3%95-15)
+  - [📚 1️⃣.3️⃣ 栈和队列](#-%E2%83%A3%E2%83%A3-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97)
       - [2021-06-07](#2021-06-07)
         - [1️⃣ 155. 最小栈](#%E2%83%A3-155-%E6%9C%80%E5%B0%8F%E6%A0%88)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-19)
@@ -167,6 +168,18 @@
         - [1️⃣ 232. 用栈实现队列](#%E2%83%A3-232-%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97)
           - [**题目描述**](#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-26)
           - [解法一](#%E8%A7%A3%E6%B3%95%E4%B8%80-4)
+      - [2021-08-13](#2021-08-13)
+        - [1️⃣ *102. 二叉树的层序遍历(BFS)](#%E2%83%A3-102-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86bfs)
+        - [2️⃣ *542. 01 矩阵(BFS)](#%E2%83%A3-542-01-%E7%9F%A9%E9%98%B5bfs)
+        - [3️⃣ *84. 柱状图中最大的矩形(单调栈)](#%E2%83%A3-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2%E5%8D%95%E8%B0%83%E6%A0%88)
+        - [4️⃣ *42. 接雨水(单调栈)](#%E2%83%A3-42-%E6%8E%A5%E9%9B%A8%E6%B0%B4%E5%8D%95%E8%B0%83%E6%A0%88)
+        - [5️⃣ *239. 滑动窗口最大值(单调队列)](#%E2%83%A3-239-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97)
+        - [6️⃣ *862. 和至少为 K 的最短子数组(单调队列)](#%E2%83%A3-862-%E5%92%8C%E8%87%B3%E5%B0%91%E4%B8%BA-k-%E7%9A%84%E6%9C%80%E7%9F%AD%E5%AD%90%E6%95%B0%E7%BB%84%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97)
+  - [📚 1️⃣.4️⃣ 优先级队列 (堆)](#-%E2%83%A3%E2%83%A3-%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97-%E5%A0%86)
+      - [2021-08-17](#2021-08-17)
+        - [1️⃣ *703. 数据流中的第 K 大元素(heapq.heappush,heapq.heappop)](#%E2%83%A3-703-%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E7%AC%AC-k-%E5%A4%A7%E5%85%83%E7%B4%A0heapqheappushheapqheappop)
+        - [2️⃣ *378. 有序矩阵中第 K 小的元素(列有序的性质，第k个最小只可能在前k行中)](#%E2%83%A3-378-%E6%9C%89%E5%BA%8F%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%AC%AC-k-%E5%B0%8F%E7%9A%84%E5%85%83%E7%B4%A0%E5%88%97%E6%9C%89%E5%BA%8F%E7%9A%84%E6%80%A7%E8%B4%A8%E7%AC%ACk%E4%B8%AA%E6%9C%80%E5%B0%8F%E5%8F%AA%E5%8F%AF%E8%83%BD%E5%9C%A8%E5%89%8Dk%E8%A1%8C%E4%B8%AD)
+        - [3️⃣ *373. 查找和最小的K对数字(heapq,set)](#%E2%83%A3-373-%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9C%80%E5%B0%8F%E7%9A%84k%E5%AF%B9%E6%95%B0%E5%AD%97heapqset)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1237,6 +1250,9 @@ class Solution:
       
 ```
 
+## 📚 1️⃣.3️⃣ 栈和队列
+
+
 ---
 
 #### 2021-06-07
@@ -1605,3 +1621,25 @@ class MyQueue:
 ```
 
 ---
+
+#### 2021-08-13
+
+#####  1️⃣ ![alt](https://img.shields.io/badge/-%E4%B8%AD%E7%AD%89-orange)102. [二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)(BFS)
+#####  2️⃣ ![alt](https://img.shields.io/badge/-%E4%B8%AD%E7%AD%89-orange)542. [01 矩阵](https://leetcode-cn.com/problems/01-matrix/)(BFS)
+#####  3️⃣ ![alt](https://img.shields.io/badge/-%E5%9B%B0%E9%9A%BE-red)84. [柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)(单调栈)
+#####  4️⃣ ![alt](https://img.shields.io/badge/-%E5%9B%B0%E9%9A%BE-red)42. [接雨水](https://leetcode-cn.com/problems/trapping-rain-water/)(单调栈)
+#####  5️⃣ ![alt](https://img.shields.io/badge/-%E5%9B%B0%E9%9A%BE-red)239. [滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)(单调队列)
+#####  6️⃣ ![alt](https://img.shields.io/badge/-%E5%9B%B0%E9%9A%BE-red)862. [和至少为 K 的最短子数组](https://leetcode-cn.com/problems/shortest-subarray-with-sum-at-least-k/)(单调队列)
+
+---
+
+## 📚 1️⃣.4️⃣ 优先级队列 (堆)
+
+#### 2021-08-17
+
+#####  1️⃣ ![alt](https://img.shields.io/badge/-%E7%AE%80%E5%8D%95-green)703. [数据流中的第 K 大元素](https://leetcode-cn.com/problems/kth-largest-element-in-a-stream/)(heapq.heappush,heapq.heappop)
+#####  2️⃣ ![alt](https://img.shields.io/badge/-%E4%B8%AD%E7%AD%89-orange)378. [有序矩阵中第 K 小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)(列有序的性质，第k个最小只可能在前k行中)
+#####  3️⃣ ![alt](https://img.shields.io/badge/-%E4%B8%AD%E7%AD%89-orange)373. [查找和最小的K对数字](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)(heapq,set)
+
+---
+
